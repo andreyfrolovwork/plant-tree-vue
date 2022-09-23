@@ -9,24 +9,37 @@ export default function (context) {
 
   context.$axios.interceptors.response.use(
     (config) => {
+      /* context.store.dispatch('clearErrorCount') */
       return config
     },
     async (error) => {
       const originalRequest = error.config
       if (
+        error.response.config.url === '/api/refresh' &&
+        error.response.status === 401
+      ) {
+        context.store.dispatch('logout').then(() => {
+          context.redirect(200, '/login')
+        })
+      } else if (
         error.response.status === 401 &&
         error.config &&
         !error.config._isRetry
       ) {
         originalRequest._isRetry = true
         try {
+          /*   if (context.store.state.errorRequestCount > 1) {
+            context.store.dispatch('logout').then(() => {
+              context.redirect(200, '/login')
+            })
+          } else { */
+          await context.store.dispatch('countInc')
           const userData = await context.$axios.$get(`/api/refresh`)
-          context.store.commit('setAuthData', userData)
-          for (const prop in userData) {
-            Cookies.set(prop, userData[prop])
-          }
+          await context.store.dispatch('refresh', userData)
           return context.$axios.request(originalRequest)
+          /* } */
         } catch (e) {
+          console.log('error')
           throw error
         }
       }

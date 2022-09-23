@@ -59,7 +59,7 @@ export const actions = {
     })
   },
 
-  logout(ctx, userData) {
+  logout(ctx) {
     return new Promise((resolve, reject) => {
       this.$axios
         .$post('/api/logout', {
@@ -88,6 +88,19 @@ export const actions = {
         })
     })
   },
+
+  refresh(ctx, authData) {
+    for (const prop in authData) {
+      Cookies.set(prop, authData[prop])
+    }
+    ctx.commit('setAuthData', authData)
+  },
+  countInc(ctx) {
+    ctx.commit('countIncrement')
+  },
+  clearErrorCount(ctx) {
+    ctx.commit('clearErrorCount')
+  },
   nuxtServerInit(state, context) {
     try {
       if (context.req.headers.cookie) {
@@ -113,12 +126,17 @@ export const mutations = {
   },
   clearAuthData(state) {
     state.isAuth = false
+    state.errorRequestCount = 0
     for (const prop in state.authData) {
       state.authData[prop] = ''
     }
   },
-  setAccessToken(state, accessToken) {
-    state.authData.accessToken = accessToken
+  countIncrement(state) {
+    console.log('set')
+    state.errorRequestCount = state.errorRequestCount + 1
+  },
+  clearErrorCount() {
+    state.errorRequestCount = 0
   },
   logout(state) {
     state.isAuth = false
@@ -150,6 +168,7 @@ export const state = () => ({
     },
   ],
   users: [],
+  errorRequestCount: 0,
 })
 
 export const getters = {
