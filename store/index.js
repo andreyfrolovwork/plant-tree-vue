@@ -95,12 +95,6 @@ export const actions = {
     }
     ctx.commit('setAuthData', authData)
   },
-  countInc(ctx) {
-    ctx.commit('countIncrement')
-  },
-  clearErrorCount(ctx) {
-    ctx.commit('clearErrorCount')
-  },
   nuxtServerInit(state, context) {
     try {
       if (context.req.headers.cookie) {
@@ -126,25 +120,9 @@ export const mutations = {
   },
   clearAuthData(state) {
     state.isAuth = false
-    state.errorRequestCount = 0
     for (const prop in state.authData) {
       state.authData[prop] = ''
     }
-  },
-  countIncrement(state) {
-    console.log('set')
-    state.errorRequestCount = state.errorRequestCount + 1
-  },
-  clearErrorCount() {
-    state.errorRequestCount = 0
-  },
-  logout(state) {
-    state.isAuth = false
-    state.authData.accessToken = ''
-    state.authData.refreshToken = ''
-    state.authData.email = ''
-    state.authData.id = ''
-    state.authData.isActivated = ''
   },
 }
 
@@ -168,7 +146,6 @@ export const state = () => ({
     },
   ],
   users: [],
-  errorRequestCount: 0,
 })
 
 export const getters = {

@@ -1,6 +1,7 @@
 <template lang="pug">
 section
   b-button.btn-1 Button
+  button 123
 </template>
 
 <script>

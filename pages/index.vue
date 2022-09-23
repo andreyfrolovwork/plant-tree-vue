@@ -1,45 +1,104 @@
 <template lang="pug">
   section
-    h1 future forest foundation
-    b-button(variant="primary" v-b-modal.modal-1) Войти
-    div
-      b-modal.center_modal#modal-1(centered title='Войти')
-        b-form-group(
-          id="input-group-1"
-          label="Email адрес:"
-          label-for="input-1"
-          description="Мы никогда не поделимся вашей электронной почтой с кем-либо еще"
-        )
-          b-form-input(type="email" placeholder="email")
-        b-form-group(
-          id="input-group-2"
-          label="Пароль:"
-          label-for="input-2"
-          description="Введите свой пароль"
-        )
-          b-form-input(type="password" placeholder="Пароль")
-    div
-      div(v-for="post in allPosts")
-        h2 {{post.id}}
-        h3 {{post.title}}
+    NavBar
+    button.btn-1 yellow
+    button.btn-2 black
+    button.btn-1.btn-2 white
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
+    div sssssssssssssssssssssss
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-
+import NavBar from '~/components/NavBar.vue'
 export default {
   middleware: "auth-m",
   name: "IndexPage",
-  computed: mapGetters(["allPosts",]),
   methods: {
-    ...mapActions(["fetchPosts"])
+    ...mapActions(["logout",]),
+    logoutMethod() {
+      this.logout().then(() => {
+        console.log('after logout');
+        this.$router.push("/login");
+      });
+    }
   },
   mounted() {
-    this.fetchPosts()
+
   }
 };
 </script>
 <style lang="scss">
+@import "../fonts/fonts.scss";
+@import "main";
 .main {
   display: flex;
   justify-content: center;

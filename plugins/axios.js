@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie'
-/* '~/plugins/axios' */
 export default function (context) {
   context.$axios.interceptors.request.use((config) => {
     console.log(context.store.state.authData.accessToken)
@@ -9,7 +7,6 @@ export default function (context) {
 
   context.$axios.interceptors.response.use(
     (config) => {
-      /* context.store.dispatch('clearErrorCount') */
       return config
     },
     async (error) => {
@@ -28,16 +25,9 @@ export default function (context) {
       ) {
         originalRequest._isRetry = true
         try {
-          /*   if (context.store.state.errorRequestCount > 1) {
-            context.store.dispatch('logout').then(() => {
-              context.redirect(200, '/login')
-            })
-          } else { */
-          await context.store.dispatch('countInc')
           const userData = await context.$axios.$get(`/api/refresh`)
           await context.store.dispatch('refresh', userData)
           return context.$axios.request(originalRequest)
-          /* } */
         } catch (e) {
           console.log('error')
           throw error
