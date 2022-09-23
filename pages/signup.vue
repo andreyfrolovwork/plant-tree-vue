@@ -1,6 +1,8 @@
 <template lang="pug">
 section
   b-form(@submit='onSubmit' @reset='onReset' v-if='show')
+    h1 Регистрация
+    b-link(href="/login") перейти ко входу
     b-form-group#input-group-1(
       label='Email address:'
       label-for='input-1'
@@ -23,9 +25,24 @@ section
         )
     b-button(type='submit' variant='primary') Submit
     b-button(type='reset' variant='danger') Reset
+    b-button(type='reset' variant='danger' @click="showAlert" ) show
   b-card.mt-3(header='Form Data Result')
     pre.m-0.
       \n{{ form }}
+  b-alert(
+    :show='dismissCountDown'
+    dismissible=''
+    variant='warning'
+    @dismissed='dismissCountDown=0'
+    @dismiss-count-down='countDownChanged'
+    )
+    p {{errorMessage}}.
+    b-progress(
+      variant='warning'
+      :max='dismissSecs'
+      :value='dismissCountDown'
+      height='4px'
+      )
 
 </template>
 
@@ -33,6 +50,7 @@ section
 import {  mapActions } from "vuex";
 
 export default {
+  middleware: "auth-m",
   name: "LoginPage",
   data() {
     return {
@@ -40,14 +58,25 @@ export default {
         email: '',
         password: '',
       },
-      show: true
+      show: true,
+      dismissSecs: 3,
+      dismissCountDown: 0,
+      showDismissibleAlert: false,
+      errorMessage:''
     }
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['signup']),
     onSubmit(event) {
       event.preventDefault()
-      this.login(this.form)
+      this.signup(this.form).then((r) => {
+        this.$router.push('/board')
+      }).catch((er) => {
+        this.form.email = ''
+        this.form.password = ''
+        this.errorMessage = er
+        this.showAlert()
+      })
     },
     onReset(event) {
       event.preventDefault()
@@ -55,6 +84,12 @@ export default {
       this.form.email = ''
       this.form.password = ''
 
+    },
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs
     }
   }
 }

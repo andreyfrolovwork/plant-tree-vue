@@ -1,0 +1,24 @@
+$fff_yellow:#FFBD12;
+$fff_black: #000000;
+$fff_black_90:#18191F;
+$fff_white:white;
+
+.btn-1 {
+  background: $fff_yellow;
+  border: 2px solid $fff_black;
+  box-shadow: 0px 2px 0px $fff_black_90;
+  border-radius: 12px;
+
+  font-family: 'f-btn-1';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 16px;
+  color: $fff_black;
+  &:hover{
+    //color: white;
+    background: $fff_white;
+    //border-color:white;
+    //box-shadow: 0px 2px 0px #ffffff;
+  }
+}

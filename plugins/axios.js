@@ -1,0 +1,36 @@
+import Cookies from 'js-cookie'
+/* '~/plugins/axios' */
+export default function (context) {
+  context.$axios.interceptors.request.use((config) => {
+    console.log(context.store.state.authData.accessToken)
+    config.headers.Authorization = `Bearer ${context.store.state.authData.accessToken}`
+    return config
+  })
+
+  context.$axios.interceptors.response.use(
+    (config) => {
+      return config
+    },
+    async (error) => {
+      const originalRequest = error.config
+      if (
+        error.response.status === 401 &&
+        error.config &&
+        !error.config._isRetry
+      ) {
+        originalRequest._isRetry = true
+        try {
+          const userData = await context.$axios.$get(`/api/refresh`)
+          context.store.commit('setAuthData', userData)
+          for (const prop in userData) {
+            Cookies.set(prop, userData[prop])
+          }
+          return context.$axios.request(originalRequest)
+        } catch (e) {
+          throw error
+        }
+      }
+      return Promise.reject(error)
+    }
+  )
+}

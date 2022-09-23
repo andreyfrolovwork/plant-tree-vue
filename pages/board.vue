@@ -5,21 +5,42 @@
       b-navbar-toggle(target='nav-collapse2')
       b-collapse#nav-collapse2(is-nav='')
         b-navbar-nav
-          b-nav-item(href='#') to landing page
-        b-navbar-nav.ml-auto
-          b-nav-item-dropdown(right='')
-            template(#button-content='')
-              em User
-            b-dropdown-item(href='#') Profile
-            b-dropdown-item(href='#') Войти
-            b-dropdown-item(href='#' v-b-modal.modal-1) modal
+          b-nav-item(href='#' v-b-modal.modal-1) модал
+        b-navbar-nav
+          b-nav-item(@click="logoutMethod") Выйти
     b-modal#modal-1(title='BootstrapVue')
       p.my-4 Hello from modal!
-
+    b-link(href="/login") перейти ко входу
+    br
+    b-link(href="/signup") перейти к регистрации
+    b-button(type='reset' variant='danger' @click="fetch" ) fetch
+    div {{user}}
+    div {{allUsers}}
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
-  name: 'BoardPage',
-}
+  middleware: "auth-m",
+  name: "BoardPage",
+  computed: {
+    ...mapGetters(["allUsers"]),
+    user(){
+      return this.$store.state.authData
+    },
+  },
+  methods: {
+    ...mapActions(["logout", "fetchUsers"]),
+    fetch() {
+      this.fetchUsers();
+    },
+    logoutMethod() {
+      this.logout().then(() => {
+        console.log('after logout');
+        this.$router.push("/login");
+      });
+    }
+  }
+};
 </script>
