@@ -4,6 +4,10 @@ $fff_black_90:#18191F;
 $fff_white:white;
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
+body {
+  margin: 0px;
+}
+
 .btn-1 {
   background: $fff_yellow;
   border: 2px solid $fff_black;
@@ -46,8 +50,8 @@ $btn-transition:              color .15s ease-in-out, background-color .15s ease
   }
 }
 .btn-2 {
-  width: 157px;
-  height: 60px;
+/*  width: 157px;
+  height: 60px;*/
 
   background: black;
   color:white;
