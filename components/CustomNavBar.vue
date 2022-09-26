@@ -1,15 +1,17 @@
 <template lang="pug">
 div
   section.sidebar(:class='sidebarClass')
-    a.active(href='#home') Home
-    a(href='#news') News
-    a(href='#contact') Contact
-    a(href='#about') About
-    button(@click="close") close
+    button.btn-close(@click="close")
+      img.point-img(src="~assets/close-ico.svg")
+    a.bar-item.active(href='/home') Home
+    a.bar-item(href='/news') News
+    a.bar-item(href='/contact') Contact
+    a.bar-item(href='/about') About
   div.rem
-    button(@click="open" :class="openBtnClass") open
+    button.btn-open(@click="open" :class="openBtnClass")
+      img(src="~assets/menu2.svg")
 </template>
-
+<!---->
 <script>
 export default {
   name: "CustomNavBar",
@@ -34,7 +36,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 /* The side navigation menu */
 .sidebar {
   margin: 0;
@@ -88,4 +90,46 @@ div.content {
 .hide{
   display: none;
 }
+
+.btn-open {
+  border: 2px solid black;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0px;
+  margin: 0;
+  background: none;
+  transition:transform 200ms ease-in-out, color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  &:hover {
+     color: #fff;
+     border-color: #545b62;
+     box-shadow: 0 0 0 0.2rem rgb(118 118 118 / 50%);
+     transform: translate(0px,2px);
+   }
+  &:focus {
+    color: #fff;
+    border-color: #545b62;
+    box-shadow: 0 0 0 0.2rem rgb(118 118 118 / 50%);
+    transform: translate(0px,2px);
+  }
+  &:active {
+    color: #fff;
+    border-color: #545b62;
+    box-shadow: 0 0 0 0.2rem rgb(118 118 118 / 50%);
+    transform: translate(0px,2px);
+  }
+}
+
+.bar-item {
+  font-family: 'm-e-bold';
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 54px;
+}
+
+.btn-close {
+  @extend .btn-open;
+  border: 0px solid black;
+}
+
 </style>

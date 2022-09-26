@@ -1,22 +1,20 @@
 <template lang="pug">
   section.main-wrapper
+    CustomNavBar
     ScreensPages
     section.main-page
-      div.test-wr main page
-      div.img-bl
-        img.img-sc1(src="~assets/woman.svg")
-      div.img-bl
-        img.img-sc1(src="~assets/woman.svg")
-      div.img-bl
-        img.img-sc1(src="~assets/woman.svg")
-      div.img-bl
-        img.img-sc1(src="~assets/woman.svg")
-      div.img-bl
-        img.img-sc1(src="~assets/woman.svg")
+      f-header
+      div.body-index main page
+        img.img-sc1(src="/images/screen_1.png")
+        img.img-sc1(src="/images/screen_1.png")
+        img.img-sc1(src="/images/screen_1.png")
+        img.img-sc1(src="/images/screen_1.png")
+        img.img-sc1(src="/images/screen_1.png")
 </template>
 <script>
 import { mapActions } from "vuex";
 import ScreensPages from "~/components/ScreensPages.vue";
+import FHeader from "~/components/f-header.vue";
 export default {
   middleware: "auth-m",
   name: "IndexPage",
@@ -43,6 +41,7 @@ export default {
 <style lang="scss">
 @import "../fonts/fonts";
 @import "main";
+/*
 
 .main {
   display: flex;
@@ -59,5 +58,6 @@ export default {
   //grid-template-rows: repeat(12,1fr);
   grid-column-gap: 16px;
 }
+*/
 
 </style>

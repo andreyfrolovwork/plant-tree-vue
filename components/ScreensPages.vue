@@ -81,10 +81,10 @@ export default {
       () => {
         console.log('callBack');
         localStorage.setItem('isShowScreens','true')
-        observer.unobserve(document.querySelector(".test-wr"))
+        observer.unobserve(document.querySelector(".body-index"))
       }, {})
 
-    observer.observe(document.querySelector(".test-wr"));
+    observer.observe(document.querySelector(".body-index"));
   }
 };
 </script>
