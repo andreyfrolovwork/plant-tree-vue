@@ -1,12 +1,12 @@
 <template lang="pug">
 div
   section.sidebar(:class='sidebarClass')
-    button.btn-close(@click="close")
-      img.point-img(src="~assets/close-ico.svg")
-    a.bar-item.active(href='/home') Home
-    a.bar-item(href='/news') News
-    a.bar-item(href='/contact') Contact
-    a.bar-item(href='/about') About
+    div.menu-header
+      button.btn-close(@click="close")
+        img.point-img(src="~assets/close-ico.svg")
+      div.menu-label Меню
+    a.bar-item(href='/main') Главная
+    a.bar-item(href='/trees') Деревья
   div.rem
     button.btn-open(@click="open" :class="openBtnClass")
       img(src="~assets/menu2.svg")
@@ -14,7 +14,8 @@ div
 <!---->
 <script>
 export default {
-  name: "CustomNavBar",
+  name: "f-navbar",
+  props:['current'],
   data() {
     return {
       sidebarClass: '',
@@ -28,6 +29,7 @@ export default {
       this.openBtnClass = 'hide'
     },
     close(){
+      console.log(this.current);
       console.log('close');
       this.sidebarClass = 'close'
       this.openBtnClass = ''
@@ -49,12 +51,29 @@ export default {
   transition: width 200ms ease-in-out;
 }
 
+
 .open {
- width: 70vw;
+ width: 100vw;
 }
 .close {
   width: 0px;
 }
+.menu-header {
+  display: flex;
+}
+
+.menu-label {
+  font-family: 'm-e-bold';
+  font-weight: 800;
+  font-size: 24px;
+  height: 118px;
+  line-height: 9rem;
+
+  flex-grow: 1;
+  text-align: center;
+
+}
+
 /* Sidebar links */
 .sidebar a {
   display: block;
@@ -92,12 +111,12 @@ div.content {
 }
 
 .btn-open {
-  border: 2px solid black;
+  border: 0px;
   border-radius: 50%;
   height: 2.5rem;
   width: 2.5rem;
   padding: 0px;
-  margin: 0;
+  margin: 24px 0 0 0;
   background: none;
   transition:transform 200ms ease-in-out, color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   &:hover {
@@ -125,11 +144,16 @@ div.content {
   font-weight: 800;
   font-size: 44px;
   line-height: 54px;
+  text-align: center;
 }
 
 .btn-close {
   @extend .btn-open;
   border: 0px solid black;
+
+  position: absolute;
+  top: 28px;
+  left: 10px;
 }
 
 </style>

@@ -1,19 +1,24 @@
 <template lang="pug">
   section.main-wrapper
-    CustomNavBar
-    ScreensPages
     f-header
       template Главная
-    section.main-page-1
-      div.label-1 Future Forest Твой персональный углеродный менеджер
+    div.main-1
+      div.l1
+        div.l1-sub1 Future Forest
+      div.l2
+</template>
+
+ section.main-page-1
+      div.label-1
+        div.label-child  Future Forest Твой персональный углеродный менеджер
       div.totem-block
         div.left
-          div.label Узнать свое тотемное дерево
+          div.label
+            div.label-child Узнать свое тотемное дерево
           input.input(type='date')
           button.btn-1 Узнать
         div.right
           img.man(src="~assets/man.svg")
-</template>
 <script>
 import { mapActions } from "vuex";
 import ScreensPages from "~/components/ScreensPages.vue";
@@ -44,16 +49,16 @@ export default {
 <style lang="scss">
 @import "../fonts/fonts";
 @import "main";
+/*
 .main-page-1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+*/
 
 .totem-block {
-  display: grid;
-  grid-template-columns: 1fr minmax(200px,1fr);
   max-width: 500px;
 
   border: 2px solid #18191F;
@@ -105,6 +110,9 @@ export default {
 }
 
 .label-1 {
+  display: flex;
+  justify-content: center;
+  background: #85e8d1;
   margin: 16px;
 
   font-family: 'm-e-bold';
@@ -112,6 +120,10 @@ export default {
   font-weight: 800;
   font-size: 36px;
   line-height: 40px;
+
+  .label-child {
+
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
@@ -147,5 +159,6 @@ export default {
     max-width: 30%;
   }
 }
+
 
 </style>

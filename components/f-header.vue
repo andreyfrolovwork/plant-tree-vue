@@ -16,8 +16,8 @@ export default {
   font-family: 'm-e-bold';
   font-weight: 800;
   font-size: 27px;
-  line-height: 6rem;
+  line-height: 9rem;
   text-align: center;
-  height: 6rem;
+  height: 118px;
 }
 </style>
