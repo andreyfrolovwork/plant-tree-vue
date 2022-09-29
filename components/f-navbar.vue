@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+section
   section.sidebar(:class='sidebarClass')
     div.menu-header
       button.btn-close(@click="close")
@@ -7,6 +7,8 @@ div
       div.menu-label Меню
     a.bar-item(href='/main') Главная
     a.bar-item(href='/trees') Деревья
+    a.bar-item(href='/login2') Войти
+    a.bar-item(href='/signup2') Регистрация
   div.rem
     button.btn-open(@click="open" :class="openBtnClass")
       img(src="~assets/menu2.svg")
@@ -41,6 +43,7 @@ export default {
 <style lang="scss">
 /* The side navigation menu */
 .sidebar {
+  z-index: 1000;
   margin: 0;
   padding: 0;
   width: 0px;
@@ -122,19 +125,19 @@ div.content {
   &:hover {
      color: #fff;
      border-color: #545b62;
-     box-shadow: 0 0 0 0.2rem rgb(118 118 118 / 50%);
+     /*box-shadow: 0 0 0 0.2rem rgb(118 118 118 / 50%);*/
      transform: translate(0px,2px);
    }
   &:focus {
     color: #fff;
     border-color: #545b62;
-    box-shadow: 0 0 0 0.2rem rgb(118 118 118 / 50%);
+    /*box-shadow: 0 0 0 0.2rem rgb(118 118 118 / 50%);*/
     transform: translate(0px,2px);
   }
   &:active {
     color: #fff;
     border-color: #545b62;
-    box-shadow: 0 0 0 0.2rem rgb(118 118 118 / 50%);
+    /*box-shadow: 0 0 0 0.2rem rgb(118 118 118 / 50%);*/
     transform: translate(0px,2px);
   }
 }
