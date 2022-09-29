@@ -6,18 +6,25 @@ section
         img.point-img(src="~assets/close-ico.svg")
       div.menu-label Меню
     a.bar-item(href='/main') Главная
-    a.bar-item(href='/trees') Деревья
-    a.bar-item(href='/login2') Войти
-    a.bar-item(href='/signup2') Регистрация
+    a.bar-item(href='/trees') Товары
+    a.bar-item(href='/board') Мои деревья
+    a.bar-item(href='/login') Войти
+    a.bar-item(href='/signup') Регистрация
+    a.bar-item(v-show="this.$store.state.isAuth" @click="logoutHandle") Выйти
   div.rem
     button.btn-open(@click="open" :class="openBtnClass")
       img(src="~assets/menu2.svg")
 </template>
 <!---->
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "f-navbar",
   props:['current'],
+  computed:{
+
+  },
   data() {
     return {
       sidebarClass: '',
@@ -25,6 +32,14 @@ export default {
     }
   },
   methods:{
+    ...mapActions(['logout']),
+    logoutHandle(){
+      this.logout().then(() => {
+        console.log('exit');
+        this.$router.push('/main')
+      })
+      /* console.log(this.$store.state.isAuth); */
+    },
     open(){
       console.log('open');
       this.sidebarClass = 'open'
@@ -56,7 +71,7 @@ export default {
 
 
 .open {
- width: 100vw;
+ width: 100%;
 }
 .close {
   width: 0px;
@@ -98,11 +113,6 @@ export default {
 }
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
-}
 
 .rem {
   position: fixed;

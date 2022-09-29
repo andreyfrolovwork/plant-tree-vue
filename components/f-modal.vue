@@ -4,7 +4,7 @@ transition(name="modal-fade")
     div.modal-frame
       div.modal-text
         slot
-      button.btn-1.modal-button(@click="closeEmitter") close emitter
+      button.btn-1.modal-button(@click="closeEmitter") Закрыть окно
 </template>
 
 <script>
@@ -16,9 +16,6 @@ export default {
       this.$emit('close')
     }
   },
-  mounted() {
-
-  }
 };
 </script>
 
