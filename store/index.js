@@ -2,6 +2,18 @@ import Cookies from 'js-cookie'
 import parseCookie from '~/utils.js'
 
 export const actions = {
+  addTree(ctx) {
+    this.$axios.$post('/api/trees-add-empty').then(() => {
+      this.$axios.$get('/api/trees-all').then((trees) => {
+        ctx.commit('updateTrees', trees)
+      })
+    })
+  },
+  fetchTrees(ctx) {
+    this.$axios.$get('/api/trees-all').then((trees) => {
+      ctx.commit('updateTrees', trees)
+    })
+  },
   async fetchPosts(ctx) {
     await fetch('https://jsonplaceholder.typicode.com/todos')
       .then((response) => response.json())
@@ -58,7 +70,6 @@ export const actions = {
         })
     })
   },
-
   logout(ctx) {
     return new Promise((resolve, reject) => {
       this.$axios
@@ -88,7 +99,6 @@ export const actions = {
         })
     })
   },
-
   refresh(ctx, authData) {
     for (const prop in authData) {
       Cookies.set(prop, authData[prop])
@@ -108,6 +118,10 @@ export const actions = {
 }
 
 export const mutations = {
+  updateTrees(state, trees) {
+    state.trees = []
+    state.trees = trees
+  },
   updateUsers(state, users) {
     state.users = users
   },
@@ -135,6 +149,19 @@ export const state = () => ({
     id: '',
     isActivated: true,
   },
+  trees: [
+    {
+      name: '',
+      specie: '',
+      price: '',
+      absorptionCo2: '',
+      lifeSpan: '',
+      height: '',
+      inStore: '',
+      description: '',
+      picturePath: '',
+    },
+  ],
   posts: [
     {
       id: 1,

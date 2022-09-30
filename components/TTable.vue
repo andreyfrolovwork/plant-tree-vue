@@ -62,6 +62,8 @@ export default {
 </script>
 <style lang='scss'>
 table {
+  font-size: 10px;
+
   border: 1px solid #eee;
   table-layout: fixed;
   width: 100%;
