@@ -2,6 +2,43 @@ import Cookies from 'js-cookie'
 import parseCookie from '~/utils.js'
 
 export const actions = {
+  getAllTreesInStore(ctx) {
+    this.$axios.$get('/api/trees-all-in-store').then((trees) => {
+      ctx.commit('updateTreesInStore', trees)
+    })
+  },
+  deleteTree(ctx, _id) {
+    this.$axios.$post('/api/trees-delete', { _id }).then(() => {
+      this.$axios.$get('/api/trees-all').then((trees) => {
+        ctx.commit('updateTrees', trees)
+      })
+    })
+  },
+  saveTree(ctx) {
+    console.log(ctx.state.treeEditedRow.picturePath instanceof File)
+
+    const fd = new FormData()
+    for (const prop in ctx.state.treeEditedRow) {
+      if (prop === 'picturePath') {
+        if (ctx.state.treeEditedRow.picturePath instanceof File) {
+          fd.append(prop, ctx.state.treeEditedRow[prop])
+        }
+      } else {
+        fd.append(prop, ctx.state.treeEditedRow[prop])
+      }
+    }
+    this.$axios
+      .$post('/api/trees-save', fd, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(() => {
+        this.$axios.$get('/api/trees-all').then((trees) => {
+          ctx.commit('updateTrees', trees)
+        })
+      })
+  },
   addTree(ctx) {
     this.$axios.$post('/api/trees-add-empty').then(() => {
       this.$axios.$get('/api/trees-all').then((trees) => {
@@ -12,16 +49,6 @@ export const actions = {
   fetchTrees(ctx) {
     this.$axios.$get('/api/trees-all').then((trees) => {
       ctx.commit('updateTrees', trees)
-    })
-  },
-  async fetchPosts(ctx) {
-    await fetch('https://jsonplaceholder.typicode.com/todos')
-      .then((response) => response.json())
-      .then((json) => ctx.commit('updatePosts', json))
-  },
-  async fetchUsers(ctx) {
-    await this.$axios.$get('/api/users').then((users) => {
-      ctx.commit('updateUsers', users)
     })
   },
   login(ctx, userData) {
@@ -118,15 +145,59 @@ export const actions = {
 }
 
 export const mutations = {
+  updateTreesInStore(state, trees) {
+    state.treesInStore = trees
+  },
+  updateName(state, name) {
+    state.treeEditedRow.name = name
+  },
+  updateSpecie(state, specie) {
+    state.treeEditedRow.specie = specie
+  },
+  updatePrice(state, price) {
+    state.treeEditedRow.price = price
+  },
+  updateAbsorptionCo2(state, absorptionCo2) {
+    state.treeEditedRow.absorptionCo2 = absorptionCo2
+  },
+  updateLifeSpan(state, lifeSpan) {
+    state.treeEditedRow.lifeSpan = lifeSpan
+  },
+  updateHeight(state, height) {
+    state.treeEditedRow.height = height
+  },
+  updateInStore(state, inStore) {
+    state.treeEditedRow.inStore = inStore
+  },
+  updateDescription(state, description) {
+    state.treeEditedRow.description = description
+  },
+  updatePicturePath(state, picturePath) {
+    state.treeEditedRow.picturePath = picturePath
+  },
+  editTree2(state, id) {
+    state.trees.forEach((tree, i) => {
+      if (tree._id === id) {
+        state.trees[i].isEdit = true
+        state.treeEditedRow = { ...tree }
+      }
+    })
+  },
+  editTree(state, id) {
+    state.trees.forEach((tree, i) => {
+      if (tree._id === id) {
+        state.trees[i].isEdit = true
+      }
+    })
+  },
   updateTrees(state, trees) {
     state.trees = []
-    state.trees = trees
-  },
-  updateUsers(state, users) {
-    state.users = users
-  },
-  updatePosts(state, posts) {
-    state.posts = posts
+    state.trees = trees.map((tree) => {
+      return {
+        ...tree,
+        isEdit: false,
+      }
+    })
   },
   setAuthData(state, userData) {
     state.authData = userData
@@ -149,6 +220,19 @@ export const state = () => ({
     id: '',
     isActivated: true,
   },
+  treesInStore: [
+    {
+      name: '',
+      specie: '',
+      price: '',
+      absorptionCo2: '',
+      lifeSpan: '',
+      height: '',
+      inStore: '',
+      description: '',
+      picturePath: '',
+    },
+  ],
   trees: [
     {
       name: '',
@@ -162,6 +246,18 @@ export const state = () => ({
       picturePath: '',
     },
   ],
+  treeEditedRow: {
+    name: '123',
+    specie: '1',
+    price: '2',
+    absorptionCo2: '3',
+    lifeSpan: '4',
+    height: '5',
+    inStore: '6',
+    description: '7',
+    picturePath: '8',
+  },
+
   posts: [
     {
       id: 1,
@@ -172,7 +268,6 @@ export const state = () => ({
       title: 'post2',
     },
   ],
-  users: [],
 })
 
 export const getters = {
