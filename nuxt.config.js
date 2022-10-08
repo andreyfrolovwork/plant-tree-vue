@@ -18,7 +18,7 @@ export default {
   css: ['@/pages/main.scss', '@/fonts/fonts.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/axios'],
+  plugins: ['~/plugins/axios', { src: '~/plugins/persistedState.client.js' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

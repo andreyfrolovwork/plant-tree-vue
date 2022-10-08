@@ -167,6 +167,7 @@ export const mutations = {
   },
   incrementTree(state, id) {
     state.basket.count++
+    state.basket.isEmpty = false
     const isContainedInBasket = state.basket.items.findIndex(
       (el) => el._id === id
     )
@@ -188,14 +189,18 @@ export const mutations = {
     )
     if (isContainedInBasket !== -1) {
       if (state.basket.items[isContainedInBasket].count >= 1) {
-        state.basket.count--
         state.basket.items[isContainedInBasket].count--
+        state.basket.count--
+        if (state.basket.count === 0) {
+          state.basket.isEmpty = true
+        }
       }
     }
   },
 }
 
 export const state = () => ({
+  persistedState: true,
   isAuth: false,
   authData: {
     accessToken: '',

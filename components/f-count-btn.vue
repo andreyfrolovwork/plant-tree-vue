@@ -28,6 +28,12 @@ export default {
       this.$store.commit("decrementTree", this.id);
       console.log("dec");
     }
+  },
+  mounted() {
+    const tree = this.$store.state.basket.items.find((tree) => (tree._id === this.id))
+    if(tree){
+      this.count = tree.count
+    }
   }
 };
 </script>

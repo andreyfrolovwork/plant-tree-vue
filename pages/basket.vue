@@ -4,7 +4,10 @@ section
   f-header
     template Корзина
   section
-    div items in basket
+    div(v-if="$store.state.basket.isEmpty")
+      div Корзина пуста
+    div(v-else)
+     div {{$store.state.basket.items}}
 </template>
 
 <script>
