@@ -1,33 +1,41 @@
 <template lang="pug">
-section tree card
-  div.f-card-pic-block
-    img.f-card-pic-img(:src="config.imgPath + tree.picturePath")
-  div.f-card-name-label
-    span.name {{tree.name}}
-    span.label {{tree.specie}}
-  div.f-card-desc {{tree.description}}
-  div.f-card-price-count
-    div.f-card-price {{tree.price}}
-    div.f-card-count-btn
-  div.f-card-btn-block
-    button.btn-2 Купить
-  div.f-card-abs
+  section
+    div.f-card-wrap
+      div.f-card-pic-block
+        img.f-card-pic-img(:src="config.imgPath + tree.picturePath")
+      div.f-card-name-label
+        div.left
+          span.name {{tree.name}}
+          span.co2 ~ {{tree.absorptionCo2}}л. CO2/год
+        div.right
+          span.label {{tree.specie}}
+      div.f-card-desc {{tree.description}}
+      div.f-card-price-count
+        div.f-card-price ₽{{tree.price}}
+        div.f-card-count-btn
+          f-count-btn
+      div.f-card-btn-block
+        button.btn-2.f-card-buy-btn Купить
 </template>
 
 <script>
-import config from '@/config/config.js'
+import config from "@/config/config.js";
+import FCountBtn from '@/components/f-count-btn.vue'
 export default {
-  props:['tree'],
+  components:{
+    FCountBtn
+  },
+  props: ["tree"],
   name: "fTreeCard",
-  data(){
+  data() {
     return {
-      config:{...config}
-    }
+      config: { ...config }
+    };
   }
 
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 </style>
