@@ -16,7 +16,7 @@ section
   div.bar-menu-open
     button.btn-open(@click="open" :class="openBtnClass")
       img(src="~assets/menu2.svg")
-  div.bar-basket-open
+  div.bar-basket-open( v-show="$store.state.basket.count !== 0" )
     div.bar-basket-count {{this.$store.state.basket.count}}
     button.btn-basket(@click="toBasket" :class="openBtnClass")
       img(src="~assets/basket.svg")
