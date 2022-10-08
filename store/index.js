@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 import parseCookie from '~/utils.js'
 import mutationsEditTree from '~/store/mutationsEditTree.js'
+
 export const actions = {
   getAllTreesInStore(ctx) {
     this.$axios.$get('/api/trees-all-in-store').then((trees) => {
@@ -145,6 +146,15 @@ export const actions = {
 
 export const mutations = {
   ...mutationsEditTree,
+  updateTrees(state, trees) {
+    state.trees = []
+    state.trees = trees.map((tree) => {
+      return {
+        ...tree,
+        isEdit: false,
+      }
+    })
+  },
   setAuthData(state, userData) {
     state.authData = userData
     state.isAuth = true
@@ -153,6 +163,34 @@ export const mutations = {
     state.isAuth = false
     for (const prop in state.authData) {
       state.authData[prop] = ''
+    }
+  },
+  incrementTree(state, id) {
+    state.basket.count++
+    const isContainedInBasket = state.basket.items.findIndex(
+      (el) => el._id === id
+    )
+    if (isContainedInBasket !== -1) {
+      state.basket.items[isContainedInBasket].count =
+        state.basket.items[isContainedInBasket].count + 1
+    } else {
+      const pushedTree = state.treesInStore.find((el) => {
+        const condition = el._id === id
+        return condition
+      })
+      pushedTree.count = 1
+      state.basket.items.push(pushedTree)
+    }
+  },
+  decrementTree(state, id) {
+    const isContainedInBasket = state.basket.items.findIndex(
+      (el) => el._id === id
+    )
+    if (isContainedInBasket !== -1) {
+      if (state.basket.items[isContainedInBasket].count >= 1) {
+        state.basket.count--
+        state.basket.items[isContainedInBasket].count--
+      }
     }
   },
 }
@@ -205,16 +243,30 @@ export const state = () => ({
   },
   basket: {
     isEmpty: true,
-    items: [
-      {
-        id: 1,
-      },
-    ],
+    items: [],
+    count: 0,
   },
 })
 
 export const getters = {
   isAuth(state) {
     return state.isAuth
+  },
+  getCount: (state) => (id) => {
+    console.log('getCount')
+    const tree = state.basket.items.find((tree) => tree._id === id)
+    if (tree === undefined) {
+      return 0
+    } else {
+      return tree.count
+    }
+  },
+  basketCount(state) {
+    if (state.basket.items.length !== 0) {
+      return state.basket.items.reduce((accum, el) => {
+        return accum + el.count
+      }, 0)
+      /* return state.basket.items.length */
+    } else return ''
   },
 }

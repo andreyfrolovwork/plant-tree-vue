@@ -13,9 +13,13 @@ section
     a.bar-item(v-show="!this.$store.state.isAuth" href='/login') Войти
     a.bar-item(v-show="!this.$store.state.isAuth" href='/signup') Регистрация
     a.bar-item(v-show="this.$store.state.isAuth" @click="logoutHandle") Выйти
-  div.rem
+  div.bar-menu-open
     button.btn-open(@click="open" :class="openBtnClass")
       img(src="~assets/menu2.svg")
+  div.bar-basket-open
+    div.bar-basket-count {{this.$store.state.basket.count}}
+    button.btn-basket(@click="toBasket" :class="openBtnClass")
+      img(src="~assets/basket.svg")
 </template>
 <!---->
 <script>
@@ -52,6 +56,9 @@ export default {
       console.log('close');
       this.sidebarClass = 'close'
       this.openBtnClass = ''
+    },
+    toBasket(){
+      this.$router.push('/basket')
     }
   }
 };
@@ -116,7 +123,7 @@ export default {
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 
-.rem {
+.bar-menu-open {
   position: fixed;
   margin: 20px;
 }
@@ -171,4 +178,28 @@ export default {
   left: 10px;
 }
 
+.btn-basket {
+  @extend .btn-open;
+ /* margin: 48px 0 0 0;*/
+}
+
+
+.bar-basket-open {
+  display: flex;
+  flex-flow: row;
+  align-items: end;
+
+  position: fixed;
+  margin: 20px;
+  right: 4px;
+  top: 2px;
+}
+
+.bar-basket-count {
+  font-family: 'm-e-bold',serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 20px;
+}
 </style>

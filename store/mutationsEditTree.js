@@ -44,15 +44,6 @@ const mutationsEditTree = {
       }
     })
   },
-  updateTrees(state, trees) {
-    state.trees = []
-    state.trees = trees.map((tree) => {
-      return {
-        ...tree,
-        isEdit: false,
-      }
-    })
-  },
 }
 
 export default mutationsEditTree

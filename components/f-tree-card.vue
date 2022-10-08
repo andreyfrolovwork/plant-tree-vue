@@ -13,7 +13,7 @@
       div.f-card-price-count
         div.f-card-price ₽{{tree.price}}
         div.f-card-count-btn
-          f-count-btn
+          f-count-btn(:id="tree._id")
       div.f-card-btn-block
         button.btn-2.f-card-buy-btn(@click="addToBasket") Купить
 </template>
@@ -29,7 +29,8 @@ export default {
   name: "fTreeCard",
   data() {
     return {
-      config: { ...config }
+      config: { ...config },
+      count:0
     };
   },
   methods:{
