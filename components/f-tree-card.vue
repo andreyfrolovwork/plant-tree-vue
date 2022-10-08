@@ -26,7 +26,7 @@ export default {
     FCountBtn
   },
   props: ["tree"],
-  name: "fTreeCard",
+  name: "FTreeCard",
   data() {
     return {
       config: { ...config },

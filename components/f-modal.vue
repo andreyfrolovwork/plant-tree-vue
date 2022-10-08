@@ -30,6 +30,8 @@ export default {
 }
 
 .modal-wrapper {
+  z-index: 999;
+
   position: absolute;
   display: flex;
   flex-flow: column;

@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "fCountBtn",
+  name: "FCountBtn",
   props: ["id"],
   data() {
     return {

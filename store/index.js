@@ -188,8 +188,14 @@ export const mutations = {
       (el) => el._id === id
     )
     if (isContainedInBasket !== -1) {
-      if (state.basket.items[isContainedInBasket].count >= 1) {
+      if (state.basket.items[isContainedInBasket].count > 1) {
         state.basket.items[isContainedInBasket].count--
+        state.basket.count--
+        if (state.basket.count === 0) {
+          state.basket.isEmpty = true
+        }
+      } else if (state.basket.items[isContainedInBasket].count === 1) {
+        state.basket.items = state.basket.items.filter((el) => el._id !== id)
         state.basket.count--
         if (state.basket.count === 0) {
           state.basket.isEmpty = true
@@ -273,5 +279,10 @@ export const getters = {
       }, 0)
       /* return state.basket.items.length */
     } else return ''
+  },
+  basketTotalPrice(state) {
+    return state.basket.items.reduce((accum, el) => {
+      return (accum = accum + el.price * el.count)
+    }, 0)
   },
 }

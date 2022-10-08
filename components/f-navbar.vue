@@ -16,9 +16,9 @@ section
   div.bar-menu-open
     button.btn-open(@click="open" :class="openBtnClass")
       img(src="~assets/menu2.svg")
-  div.bar-basket-open( v-show="$store.state.basket.count !== 0" )
+  div.bar-basket-open( v-show="$store.state.basket.count !== 0" :class="openBtnClass")
     div.bar-basket-count {{this.$store.state.basket.count}}
-    button.btn-basket(@click="toBasket" :class="openBtnClass")
+    button.btn-basket(@click="toBasket" )
       img(src="~assets/basket.svg")
 </template>
 <!---->
@@ -26,7 +26,7 @@ section
 import { mapActions } from "vuex";
 
 export default {
-  name: "f-navbar",
+  name: "FNavbar",
   props:['current'],
   computed:{
 
