@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import parseCookie from '~/utils.js'
-
+import mutationsEditTree from '~/store/mutationsEditTree.js'
 export const actions = {
   getAllTreesInStore(ctx) {
     this.$axios.$get('/api/trees-all-in-store').then((trees) => {
@@ -16,7 +16,6 @@ export const actions = {
   },
   saveTree(ctx) {
     console.log(ctx.state.treeEditedRow.picturePath instanceof File)
-
     const fd = new FormData()
     for (const prop in ctx.state.treeEditedRow) {
       if (prop === 'picturePath') {
@@ -145,60 +144,7 @@ export const actions = {
 }
 
 export const mutations = {
-  updateTreesInStore(state, trees) {
-    state.treesInStore = trees
-  },
-  updateName(state, name) {
-    state.treeEditedRow.name = name
-  },
-  updateSpecie(state, specie) {
-    state.treeEditedRow.specie = specie
-  },
-  updatePrice(state, price) {
-    state.treeEditedRow.price = price
-  },
-  updateAbsorptionCo2(state, absorptionCo2) {
-    state.treeEditedRow.absorptionCo2 = absorptionCo2
-  },
-  updateLifeSpan(state, lifeSpan) {
-    state.treeEditedRow.lifeSpan = lifeSpan
-  },
-  updateHeight(state, height) {
-    state.treeEditedRow.height = height
-  },
-  updateInStore(state, inStore) {
-    state.treeEditedRow.inStore = inStore
-  },
-  updateDescription(state, description) {
-    state.treeEditedRow.description = description
-  },
-  updatePicturePath(state, picturePath) {
-    state.treeEditedRow.picturePath = picturePath
-  },
-  editTree2(state, id) {
-    state.trees.forEach((tree, i) => {
-      if (tree._id === id) {
-        state.trees[i].isEdit = true
-        state.treeEditedRow = { ...tree }
-      }
-    })
-  },
-  editTree(state, id) {
-    state.trees.forEach((tree, i) => {
-      if (tree._id === id) {
-        state.trees[i].isEdit = true
-      }
-    })
-  },
-  updateTrees(state, trees) {
-    state.trees = []
-    state.trees = trees.map((tree) => {
-      return {
-        ...tree,
-        isEdit: false,
-      }
-    })
-  },
+  ...mutationsEditTree,
   setAuthData(state, userData) {
     state.authData = userData
     state.isAuth = true
@@ -257,26 +203,17 @@ export const state = () => ({
     description: '7',
     picturePath: '8',
   },
-
-  posts: [
-    {
-      id: 1,
-      title: 'post1',
-    },
-    {
-      id: 2,
-      title: 'post2',
-    },
-  ],
+  basket: {
+    isEmpty: true,
+    items: [
+      {
+        id: 1,
+      },
+    ],
+  },
 })
 
 export const getters = {
-  allPosts(state) {
-    return state.posts
-  },
-  allUsers(state) {
-    return state.users
-  },
   isAuth(state) {
     return state.isAuth
   },

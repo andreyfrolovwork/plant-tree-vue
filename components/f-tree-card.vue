@@ -15,7 +15,7 @@
         div.f-card-count-btn
           f-count-btn
       div.f-card-btn-block
-        button.btn-2.f-card-buy-btn Купить
+        button.btn-2.f-card-buy-btn(@click="addToBasket") Купить
 </template>
 
 <script>
@@ -31,8 +31,12 @@ export default {
     return {
       config: { ...config }
     };
+  },
+  methods:{
+    addToBasket(){
+      console.log('add');
+    }
   }
-
 };
 </script>
 

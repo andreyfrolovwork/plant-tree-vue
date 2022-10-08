@@ -8,6 +8,7 @@ section
     a.bar-item(href='/main') Главная
     a.bar-item(href='/trees') Товары
     a.bar-item(href='/board') Мои деревья
+    a.bar-item(href='/basket') Корзина
     a.bar-item(href='/admin') Admin page
     a.bar-item(v-show="!this.$store.state.isAuth" href='/login') Войти
     a.bar-item(v-show="!this.$store.state.isAuth" href='/signup') Регистрация
