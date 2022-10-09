@@ -5,7 +5,7 @@ section
       button.btn-close(@click="close")
         img.point-img(src="~assets/close-ico.svg")
       div.menu-label Меню
-    a.bar-item(href='/main') Главная
+    a.bar-item(href='/') Главная
     a.bar-item(href='/trees') Товары
     a.bar-item(href='/board') Мои деревья
     a.bar-item(href='/basket') Корзина
@@ -16,7 +16,7 @@ section
   div.bar-menu-open
     button.btn-open(@click="open" :class="openBtnClass")
       img(src="~assets/menu2.svg")
-  div.bar-basket-open( v-show="$store.state.basket.count !== 0" :class="openBtnClass")
+  div.bar-basket-open(v-show="$store.state.basket.count !== 0" :class="openBtnClass")
     div.bar-basket-count {{this.$store.state.basket.count}}
     button.btn-basket(@click="toBasket" )
       img(src="~assets/basket.svg")
@@ -42,7 +42,7 @@ export default {
     logoutHandle(){
       this.logout().then(() => {
         console.log('exit');
-        this.$router.push('/main')
+        this.$router.push('/')
       })
       /* console.log(this.$store.state.isAuth); */
     },

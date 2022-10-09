@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       isViewScreens: "hide",
+    /*   isViewScreens: "hide", */
       isOpenModal:false
     };
   },
@@ -81,14 +82,14 @@ export default {
       () => {
         console.log('callBack');
         localStorage.setItem('isShowScreens','true')
-        observer.unobserve(document.querySelector(".main-page-1"))
+        observer.unobserve(document.querySelector(".index-body"))
       }, {
-        root: document.querySelector('.main-wrapper'),
+        root: document.querySelector('.index-wrapper'),
         rootMargin: '0px',
         threshold: 0.1
       })
 
-    observer.observe(document.querySelector(".main-page-1"));
+    observer.observe(document.querySelector(".index-body"));
   }
 };
 </script>
