@@ -1,23 +1,20 @@
 <template lang="pug">
-section.f-b-c-wrap
-  div.f-b-c-block-pic
-    img.f-card-pic-img(:src="config.imgPath + tree.picturePath")
-  div.f-b-c-block
-    div.f-b-c-description
-      div.f-b-c-block-1
-        span.f-b-c-name {{tree.name}}
-        span.f-b-c-label {{tree.specie}}
-      div.f-b-c-block-2
-        div.f-b-c-price ₽{{tree.price}}
-        div.f-b-c-price {{tree.count}}шт.
-    div.f-b-c-block-3
-      button.f-b-c-del(@click="removeFromBasket(tree._id)") ╳
+  section.f-b-c-wrap
+    div.f-b-c-block-pic
+      img.f-card-pic-img(:src="config.imgPath + tree.picturePath")
+    div.f-b-c-block
+      div.f-b-c-description
+        div.f-b-c-block-1
+          span.f-b-c-name {{tree.name}}
+          span.f-b-c-label {{tree.specie}}
+        div.f-b-c-block-2
+          div.f-b-c-price {{new Date(tree.buyData).toLocaleString()}}
 </template>
 
 <script>
 import config from "@/config/config.js";
 export default {
-  name: "FTreeBasketCard",
+  name: "FTreeBoardCard",
   props:['tree'],
   data() {
     return {

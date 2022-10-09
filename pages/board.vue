@@ -4,12 +4,17 @@ section
   f-header
     template Мои деревья
   section board page
+    div(v-for="tree in $store.state.history")
+      f-tree-board-card(:tree="tree")
 </template>
 
 <script>
 export default {
-  name: "boardPage",
-  middleware:'auth-m'
+  name: "BoardPage",
+  middleware:'auth-m',
+  mounted() {
+    this.$store.dispatch('getMyTrees')
+  }
 };
 </script>
 

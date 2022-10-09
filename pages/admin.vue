@@ -38,9 +38,9 @@
         Column(prop="picturePath" title="Действия")
           template(#default="{row:{_id}}")
             button( @click="edit2(_id)") edit
-            button(@click="deleteTree(_id)") delete
       button(@click="addTree") добавить дерево
 </template>
+<!--button(@click="deleteTree(_id)") delete-->
 <script>
 import TTable from "@/components/TTable.vue";
 import CColumn from "@/components/CColumn.vue";

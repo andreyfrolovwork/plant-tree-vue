@@ -9,7 +9,7 @@ section
     a.bar-item(href='/trees') Товары
     a.bar-item(href='/board') Мои деревья
     a.bar-item(href='/basket') Корзина
-    a.bar-item(href='/admin') Admin page
+    a.bar-item(v-show="this.$store.state.authData.role === 'admin'" href='/admin') Admin page
     a.bar-item(v-show="!this.$store.state.isAuth" href='/login') Войти
     a.bar-item(v-show="!this.$store.state.isAuth" href='/signup') Регистрация
     a.bar-item(v-show="this.$store.state.isAuth" @click="logoutHandle") Выйти

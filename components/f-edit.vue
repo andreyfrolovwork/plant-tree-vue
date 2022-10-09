@@ -64,8 +64,7 @@ export default {
       set(value) {
         this.$store.commit("updateSpecie", value);
       }
-    }
-    ,
+    },
     price: {
       get() {
         return this.$store.state.treeEditedRow.price;
@@ -73,8 +72,7 @@ export default {
       set(value) {
         this.$store.commit("updatePrice", value);
       }
-    }
-    ,
+    },
     absorptionCo2: {
       get() {
         return this.$store.state.treeEditedRow.absorptionCo2;
@@ -82,8 +80,7 @@ export default {
       set(value) {
         this.$store.commit("updateAbsorptionCo2", value);
       }
-    }
-    ,
+    },
     lifeSpan: {
       get() {
         return this.$store.state.treeEditedRow.lifeSpan;
@@ -91,8 +88,7 @@ export default {
       set(value) {
         this.$store.commit("updateLifeSpan", value);
       }
-    }
-    ,
+    },
     height: {
       get() {
         return this.$store.state.treeEditedRow.height;
@@ -100,8 +96,7 @@ export default {
       set(value) {
         this.$store.commit("updateHeight", value);
       }
-    }
-    ,
+    },
     inStore: {
       get() {
         return this.$store.state.treeEditedRow.inStore;
@@ -109,8 +104,7 @@ export default {
       set(value) {
         this.$store.commit("updateInStore", value);
       }
-    }
-    ,
+    },
     description: {
       get() {
         return this.$store.state.treeEditedRow.description;
@@ -123,15 +117,15 @@ export default {
   methods: {
     save() {
       this.$store.dispatch("saveTree").then(() => {
-        this.$refs.fileIn.value = ''
+        this.$refs.fileIn.value = "";
       });
     },
     setFile(event) {
-      console.log('setFile');
+      console.log("setFile");
       console.log(event.target.files);
       this.$store.commit("updatePicturePath", event.target.files[0]);
 
-    },
+    }
   }
 };
 </script>
@@ -140,7 +134,8 @@ export default {
 .f-edit-select {
   width: 100%;
 }
+
 .f-edit-file {
-/*  width: 200px;*/
+  /*  width: 200px;*/
 }
 </style>

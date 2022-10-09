@@ -3,6 +3,11 @@ import parseCookie from '~/utils.js'
 import mutationsEditTree from '~/store/mutationsEditTree.js'
 
 export const actions = {
+  getMyTrees(ctx) {
+    this.$axios.$get('/api/trees-my').then((history) => {
+      ctx.commit('setSellHistory', history)
+    })
+  },
   getAllTreesInStore(ctx) {
     this.$axios.$get('/api/trees-all-in-store').then((trees) => {
       ctx.commit('updateTreesInStore', trees)
@@ -146,6 +151,7 @@ export const actions = {
 
 export const mutations = {
   ...mutationsEditTree,
+
   updateTrees(state, trees) {
     state.trees = []
     state.trees = trees.map((tree) => {
@@ -164,6 +170,11 @@ export const mutations = {
     for (const prop in state.authData) {
       state.authData[prop] = ''
     }
+  },
+  removeFromBasket(state, id) {
+    state.basket.count =
+      state.basket.count - state.basket.items.find((el) => el._id === id).count
+    state.basket.items = state.basket.items.filter((el) => el._id !== id)
   },
   incrementTree(state, id) {
     state.basket.count++
@@ -203,6 +214,9 @@ export const mutations = {
       }
     }
   },
+  setSellHistory(state, history) {
+    state.history = history
+  },
 }
 
 export const state = () => ({
@@ -214,6 +228,7 @@ export const state = () => ({
     email: '',
     id: '',
     isActivated: true,
+    role: '',
   },
   treesInStore: [
     {
@@ -257,6 +272,23 @@ export const state = () => ({
     items: [],
     count: 0,
   },
+  history: [
+    {
+      name: 'Сосна',
+      specie: 'Хвойные',
+      price: 99,
+      absorptionCo2: '305,4',
+      lifeSpan: 400,
+      height: 40,
+      description:
+        'Самое многочисленное в России дерево — именно сосна. Ценный камень янтарь — застывшая смола древних сосен.',
+      inStore: true,
+      picturePath: '96448d90-4587-11ed-9b8c-cb1102e567a2.png',
+      _id: '633ee742e3b255d2c6837895',
+      __v: 0,
+      buyData: '2022-10-09T14:12:02.189Z',
+    },
+  ],
 })
 
 export const getters = {
