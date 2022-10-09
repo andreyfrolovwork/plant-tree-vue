@@ -3,7 +3,7 @@ section
   f-navbar
   f-header
     template Мои деревья
-  section board page
+  section
     div(v-for="tree in $store.state.history")
       f-tree-board-card(:tree="tree")
 </template>

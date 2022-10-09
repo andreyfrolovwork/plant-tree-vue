@@ -3,6 +3,26 @@ import parseCookie from '~/utils.js'
 import mutationsEditTree from '~/store/mutationsEditTree.js'
 
 export const actions = {
+  buyTrees(ctx) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .$post('/api/trees-buy', ctx.state.basket)
+        .then((res) => {
+          ctx.commit('clearBasket')
+          resolve(res)
+        })
+        .catch((error) => {
+          if (error) {
+            if (error.response) {
+              if (error.response.data) {
+                if (error.response.data.message)
+                  reject(error.response.data.message)
+              }
+            }
+          }
+        })
+    })
+  },
   getMyTrees(ctx) {
     this.$axios.$get('/api/trees-my').then((history) => {
       ctx.commit('setSellHistory', history)
@@ -216,6 +236,12 @@ export const mutations = {
   },
   setSellHistory(state, history) {
     state.history = history
+  },
+  clearBasket(state) {
+    console.log('clear basket')
+    state.basket.isEmpty = true
+    state.basket.items = []
+    state.basket.count = 0
   },
 }
 

@@ -15,7 +15,7 @@
         div.f-card-count-btn
           f-count-btn(:id="tree._id")
       div.f-card-btn-block
-        button.btn-2.f-card-buy-btn(@click="addToBasket") Купить
+        button.btn-2.f-card-buy-btn(@click="addToBasket") Посадить дерево
 </template>
 
 <script>
@@ -35,7 +35,7 @@ export default {
   },
   methods:{
     addToBasket(){
-      console.log('add');
+      this.$router.push('/basket')
     }
   }
 };

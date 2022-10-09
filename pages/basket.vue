@@ -11,7 +11,7 @@ section
     div.basket-total
       div.b-t-total-price ₽{{$store.getters.basketTotalPrice}}
       div.b-t-btn
-        button.btn-2.b-t-buy-button(@click="showModal = true") Оплатить
+        button.btn-2.b-t-buy-button(@click="buyMethod") Оплатить
 
 </template>
 
@@ -30,6 +30,12 @@ export default {
   methods: {
     closeModal(){
       this.showModal = false
+    },
+    buyMethod(){
+      this.$store.dispatch('buyTrees').then(() => {
+        this.$router.push('/board')
+      })
+      this.showModal = true
     }
   }
 };

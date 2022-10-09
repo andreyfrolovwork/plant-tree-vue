@@ -1,36 +1,36 @@
 <template lang="pug">
-section.index-wrapper
-  ScreensPages
-  f-navbar
-  f-header.index-body
-    template Главная
-  section.main-page-1
-    div.totem-parent
-      div.totem-block
-        div.left
-          div.label
-            div.label-child Узнать свое тотемное дерево
-          input.input(type='date')
-          button.btn-1 Узнать
-    div.label-1
-      div.label-child Как работает?
-    div.quad-4
-      div.quad
-        div.quad-img-wrap
-          img(src="~/assets/quad-1.svg")
-        div.quad-label Выберите дерево
-      div.quad
-        div.quad-img-wrap
-          img(src="~/assets/quad-2.svg")
-        div.quad-label Сделайте взнос
-      div.quad
-        div.quad-img-wrap
-          img(src="~/assets/quad-3.svg")
-        div.quad-label Пишите свою историю
-      div.quad
-        div.quad-img-wrap
-          img(src="~/assets/quad-4.svg")
-        div.quad-label Мы расскажешь о вас всему миру
+  section.index-wrapper
+    ScreensPages
+    f-navbar
+    f-header.index-body
+      template Главная
+    section.main-page-1
+      div.totem-parent
+        div.totem-block
+          div.left
+            div.label
+              div.label-child Узнать свое тотемное дерево
+            input.input(type='date')
+            button.btn-1 Узнать
+      div.label-1
+        div.label-child Как работает?
+      div.quad-4
+        div.quad(@click="$router.push('/trees')")
+          div.quad-img-wrap
+            img(src="~/assets/quad-1.svg")
+          div.quad-label Выберите дерево
+        div.quad
+          div.quad-img-wrap
+            img(src="~/assets/quad-2.svg")
+          div.quad-label Сделайте взнос
+        div.quad
+          div.quad-img-wrap
+            img(src="~/assets/quad-3.svg")
+          div.quad-label Пишите свою историю
+        div.quad
+          div.quad-img-wrap
+            img(src="~/assets/quad-4.svg")
+          div.quad-label Мы расскажешь о вас всему миру
 </template>
 
 <script>
@@ -38,24 +38,26 @@ import FHeader from "~/components/f-header.vue";
 import FNavbar from "~/components/f-navbar.vue";
 import ScreensPages from "~/components/ScreensPages.vue";
 import FNavBar from "~/components/f-navbar.vue";
+
 export default {
   name: "mainPage",
   component: {
     ScreensPages,
     FHeader,
     FNavBar
-  },
+  }
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 
 .totem-parent {
   display: flex;
   justify-content: center;
 }
+
 .quad-label {
-  font-family: 'm-e-bold',serif;
+  font-family: 'm-e-bold', serif;
   font-weight: 800;
   font-size: 16px;
   line-height: 28px;
@@ -78,7 +80,7 @@ export default {
   margin: 16px 16px 16px 16px;
   padding: 16px;
 
-  font-family: 'm-e-bold',serif;
+  font-family: 'm-e-bold', serif;
   font-style: normal;
   font-weight: 800;
   font-size: 22px;
@@ -106,6 +108,7 @@ export default {
     display: flex;
     justify-content: flex-end;
   }
+
   .input {
     margin: 16px 0 0 0;
     max-width: fit-content;
@@ -122,7 +125,7 @@ export default {
 .label-1 {
   display: flex;
   justify-content: center;
- /* background: #85e8d1;*/
+  /* background: #85e8d1;*/
   margin: 16px;
 
   font-family: 'm-e-bold';
@@ -138,6 +141,22 @@ export default {
   flex-flow: row wrap;
   justify-content: space-around;
   margin: 0 16px;
+}
+
+.quad {
+  transition: transform 200ms ease-in-out, color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+  &:hover {
+    transform: translate(0px, 2px);
+  }
+
+  &:focus {
+    transform: translate(0px, 2px);
+  }
+
+  &:active {
+    transform: translate(0px, 2px);
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
