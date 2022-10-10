@@ -3,6 +3,7 @@ section
   f-navbar
   f-header
     template Товары
+  f-group
   section.trees
     div(v-for="tree in $store.state.treesInStore")
       f-tree-card(:tree="tree")

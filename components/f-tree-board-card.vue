@@ -5,17 +5,26 @@
     div.f-b-c-block
       div.f-b-c-description
         div.f-b-c-block-1
+          span.f-b-c-label {{date}}
           span.f-b-c-name {{tree.name}}
-          span.f-b-c-label {{tree.specie}}
+          span.co2 ~ {{tree.absorptionCo2}}л. CO2/год
         div.f-b-c-block-2
-          div.f-b-c-price {{new Date(tree.buyData).toLocaleString()}}
+          button.f-map-bt
+            img.f-map-svg(src="~assets/map.svg")
+            span.f-map-text На карте
 </template>
 
 <script>
+import dayjs from 'dayjs'
 import config from "@/config/config.js";
 export default {
   name: "FTreeBoardCard",
   props:['tree'],
+  computed:{
+    date(){
+      return dayjs(this.tree.buyData).format('DD.MM.YYYY')
+    }
+  },
   data() {
     return {
       config: { ...config },
@@ -29,7 +38,54 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.f-b-c-block-pic {
+  width: 13vh;
+}
+.f-b-c-block-2 {
+  margin: -3px 0 8px 0;
+}
+.co2 {
+  font-family: "m-e-bold-reg", serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 26px;
+  color: #65CC2D;
+}
+.f-map-svg {
+  top: 9px;
+  position: relative;
+  margin-right: 3px;
+}
+.f-map-text {
+  font-family: "m-e-bold", serif;
+  font-style: normal;
+  font-weight: 800;
+  color: #000000;
+  font-size: 13px;
+  line-height: 13px;
+}
+
+.f-map-bt {
+  background: none;
+  border: none;
+
+  transition: transform 200ms ease-in-out, color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+  &:hover {
+    transform: translate(0px, 2px);
+  }
+
+  &:focus {
+    transform: translate(0px, 2px);
+  }
+
+  &:active {
+    transform: translate(0px, 2px);
+  }
+}
+
 .f-b-c-name {
   display: flex;
   flex: 1;
@@ -37,8 +93,8 @@ export default {
   font-style: normal;
   font-weight: 800;
   color: #000000;
-  font-size: 24px;
-  line-height: 34px;
+  font-size: 22px;
+  line-height: 32px;
 }
 
 .f-b-c-label {
@@ -50,47 +106,5 @@ export default {
   color: #474A57;
 }
 
-.f-b-c-wrap {
-  margin: 16px 16px 16px 16px;
-  display: flex;
-  flex-flow: row;
-}
-.f-b-c-block-pic {
-  display: flex;
-  background: #FFBD12;
-  border-radius: 16px;
-  width: 10vh;
-  margin: 0 16px 0 0;
-}
-.f-b-c-block {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  flex: 1;
-}
-.f-b-c-description {
-  flex: 1;
-  display: flex;
-  flex-flow: column;
-}
-.f-b-c-block-2 {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-}
 
-.f-b-c-price {
-  font-family: "m-e-bold",serif;
-  font-style: normal;
-  font-weight: 800;
-  font-size: 20px;
-  line-height: 34px;
-}
-.f-b-c-del {
-  width: fit-content;
-  height: fit-content;
-  font-weight: 900;
-  border: none;
-  background: none;
-}
 </style>

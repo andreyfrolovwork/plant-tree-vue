@@ -28,10 +28,14 @@ export const actions = {
       ctx.commit('setSellHistory', history)
     })
   },
-  getAllTreesInStore(ctx) {
-    this.$axios.$get('/api/trees-all-in-store').then((trees) => {
-      ctx.commit('updateTreesInStore', trees)
-    })
+  getAllTreesInStore(ctx, specie) {
+    this.$axios
+      .$post('/api/trees-all-in-store', {
+        type: specie,
+      })
+      .then((trees) => {
+        ctx.commit('updateTreesInStore', trees)
+      })
   },
   deleteTree(ctx, _id) {
     this.$axios.$post('/api/trees-delete', { _id }).then(() => {
