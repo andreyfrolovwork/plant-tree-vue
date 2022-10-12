@@ -3,7 +3,7 @@ section
   f-navbar
   f-header
     template Вопросы
-  section.f-questions
+  section.faq
     div.f-q-header Что такое углеродная нейтральность?
     div.f-q-text Углеродная нейтральность - термин, который означает, что компания или человек сократил(а) до нуля выбросы углекислого газа и его аналогов в процессе своей производственной деятельности или жизнедеятельности.
     div.f-q-header Углеродная компенсация
@@ -36,20 +36,19 @@ section
 
 <script>
 export default {
-  name: "questionsPage"
+  name: "faqPage"
 };
 </script>
 
 <style scoped>
-.f-questions {
+.faq {
   margin: 16px;
 }
 .f-q-header {
-  font-family: 'm-e-bold',serif;
-  font-style: normal;
-  font-weight: 800;
-  font-size: 36px;
-  line-height: 40px;
+  font-family: 'm-e-medium',serif;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
 
   margin: 0 0 16px 0;
 }

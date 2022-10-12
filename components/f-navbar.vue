@@ -6,10 +6,13 @@ section
         img.point-img(src="~assets/close-ico.svg")
       div.menu-label Меню
     a.bar-item(href='/') Главная
-    a.bar-item(href='/trees') Товары
     a.bar-item(href='/board') Мои деревья
-    a.bar-item(href='/questions') О нас
+    a.bar-item(href='/map') Карта
+    a.bar-item(href='/trees') Товары
     a.bar-item(href='/basket') Корзина
+    a.bar-item(href='/questions') О нас
+    a.bar-item(href='/contacts') Контакты
+    a.bar-item(href='/faq') FAQ
     a.bar-item(v-show="this.$store.state.authData.role === 'admin'" href='/admin') Admin page
     a.bar-item(v-show="!this.$store.state.isAuth" href='/login') Войти
     a.bar-item(v-show="!this.$store.state.isAuth" href='/signup') Регистрация
