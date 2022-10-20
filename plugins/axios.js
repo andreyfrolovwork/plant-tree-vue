@@ -1,6 +1,5 @@
 export default function (context) {
   context.$axios.interceptors.request.use((config) => {
-    /* console.log(context.store.state.authData.accessToken) */
     config.headers.Authorization = `Bearer ${context.store.state.authData.accessToken}`
     return config
   })

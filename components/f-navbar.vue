@@ -45,19 +45,14 @@ export default {
     ...mapActions(['logout']),
     logoutHandle(){
       this.logout().then(() => {
-        console.log('exit');
-        this.$router.push('/')
+        this.$router.push('/');
       })
-      /* console.log(this.$store.state.isAuth); */
     },
     open(){
-      console.log('open');
       this.sidebarClass = 'open'
       this.openBtnClass = 'hide'
     },
     close(){
-      console.log(this.current);
-      console.log('close');
       this.sidebarClass = 'close'
       this.openBtnClass = ''
     },

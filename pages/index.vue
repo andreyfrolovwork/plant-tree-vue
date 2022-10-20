@@ -99,7 +99,7 @@ export default {
   },
   methods:{
     startTest(){
-      console.log('start test');
+
       document.querySelector('body').style.overflow = 'hidden'
       window.scrollTo({
         top:'0px'

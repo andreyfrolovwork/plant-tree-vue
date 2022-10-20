@@ -75,7 +75,7 @@ export default {
       this.$store.dispatch("addTree");
     },
     edit(id) {
-      console.log("edit");
+
       this.$store.commit("editTree", id);
     },
     edit2(id){
@@ -84,7 +84,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchTrees");
-    console.log(this.$store);
+
   },
 
 };

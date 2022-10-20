@@ -19,14 +19,14 @@ export default {
     incrementCount() {
       this.$store.commit("incrementTree", this.id);
       this.count++
-      console.log("inc");
+
     },
     decrementCount() {
       if(this.count >= 1){
         this.count--
       }
       this.$store.commit("decrementTree", this.id);
-      console.log("dec");
+
     }
   },
   mounted() {

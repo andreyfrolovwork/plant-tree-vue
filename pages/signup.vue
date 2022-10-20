@@ -49,7 +49,7 @@ export default {
         this.showModal = true;
       } else {
         this.signup(this.form).then((r) => {
-          console.log('push board2');
+
           this.$router.push("/board");
         }).catch((er) => {
           this.form.email = "";

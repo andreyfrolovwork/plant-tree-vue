@@ -48,14 +48,14 @@ export default {
   },
   methods: {
     toScreen1() {
-      console.log("to 1");
+
       window.scrollTo({
         top: window.innerHeight,
         behavior: "smooth"
       });
     },
     toScreen2() {
-      console.log("to 2");
+
       window.scrollTo({
         top: window.innerHeight * 2,
         behavior: "smooth"
@@ -75,12 +75,12 @@ export default {
   mounted() {
     if(localStorage.getItem('isShowScreens') !== 'true'){
       this.isViewScreens = "";
-      console.log('unhide');
+
     }
 
     const observer = new IntersectionObserver(
       () => {
-        console.log('callBack');
+
         localStorage.setItem('isShowScreens','true')
         observer.unobserve(document.querySelector(".index-body"))
       }, {

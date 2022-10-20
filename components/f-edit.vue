@@ -121,8 +121,8 @@ export default {
       });
     },
     setFile(event) {
-      console.log("setFile");
-      console.log(event.target.files);
+
+
       this.$store.commit("updatePicturePath", event.target.files[0]);
 
     }

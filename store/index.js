@@ -45,7 +45,6 @@ export const actions = {
     })
   },
   saveTree(ctx) {
-    console.log(ctx.state.treeEditedRow.picturePath instanceof File)
     const fd = new FormData()
     for (const prop in ctx.state.treeEditedRow) {
       if (prop === 'picturePath') {
@@ -139,9 +138,7 @@ export const actions = {
             }
             ctx.commit('clearAuthData')
             resolve(true)
-          } catch (e) {
-            console.log(e)
-          }
+          } catch (e) {}
         })
         .catch((error) => {
           if (error) {
@@ -167,9 +164,7 @@ export const actions = {
         const userData = parseCookie(context.req.headers.cookie)
         state.commit('setAuthData', userData)
       }
-    } catch (e) {
-      console.log('error when parse cookie')
-    }
+    } catch (e) {}
   },
 }
 
@@ -242,7 +237,6 @@ export const mutations = {
     state.history = history
   },
   clearBasket(state) {
-    console.log('clear basket')
     state.basket.isEmpty = true
     state.basket.items = []
     state.basket.count = 0
@@ -326,7 +320,6 @@ export const getters = {
     return state.isAuth
   },
   getCount: (state) => (id) => {
-    console.log('getCount')
     const tree = state.basket.items.find((tree) => tree._id === id)
     if (tree === undefined) {
       return 0
