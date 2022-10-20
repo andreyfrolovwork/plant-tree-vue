@@ -1,7 +1,7 @@
 <template lang="pug">
 transition(name="modal-fade")
   section.modal-wrapper
-    div.modal-frame
+    div.modal-frame-q
       div.modal-text
         slot
       button.btn-1.modal-button(@click="closeEmitter") Закрыть окно
@@ -9,7 +9,7 @@ transition(name="modal-fade")
 
 <script>
 export default {
-  name: "f-modal",
+  name: "FQuis",
   props:['show'],
   methods: {
     closeEmitter(){
@@ -44,16 +44,20 @@ export default {
   justify-content: center;
 }
 
-.modal-frame {
+.modal-frame-q {
   display: flex;
   flex-flow: column;
-  background: azure;
+  background: #FFBD12;
   border: 2px solid #18191F;
   justify-content: center;
   box-shadow: 0px 6px 0px #18191f;
   align-items: center;
   border-radius: 16px;
-  max-width: 500px;
+
+  width: 320px;
+  height: 370px;
+
+  align-items: center;
 }
 
 .modal-text {

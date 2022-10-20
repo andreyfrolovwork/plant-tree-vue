@@ -30,12 +30,54 @@
         div.quad
           div.quad-img-wrap
             img(src="~/assets/quad-4.svg")
-          div.quad-label Мы расскажешь о вас всему миру
+          div.quad-label Мы расскажешь о вас всему
+      div.text-block
+        div.test-head Пройти тест на углеродную нейтральность
+        div.test-button-block
+          button.btn-2.test-button(@click="startTest") Пройти тест
+      f-quis(v-show="showModal1" @close="closeModal1")
+        template
+          section.quis-sec
+            div.quis-q1 01. Вопрос
+            div.quis-q2 Ваш пол
+            div.q-check-box
+              div.quis-input-box
+                input.quis-checkbox(type="checkbox")
+                label.quis-label Женщина
+              div.quis-input-box
+                input.quis-checkbox(type="checkbox")
+                label.quis-label Мужчина
+      f-quis(v-show="showModal2" @close="closeModal2")
+        template
+          section.quis-sec
+            div.quis-q1 02. Вопрос
+            div.quis-q2 Ваш пол
+            div.q-check-box
+              div.quis-input-box
+                input.quis-checkbox(type="checkbox")
+                label.quis-label Женщина
+              div.quis-input-box
+                input.quis-checkbox(type="checkbox")
+                label.quis-label Мужчина
+      f-quis(v-show="showModal3" @close="closeModal3")
+        template
+          section.quis-sec
+            div.quis-q1 03. Вопрос
+            div.quis-q2 Ваш пол
+            div.q-check-box
+              div.quis-input-box
+                input.quis-checkbox(type="checkbox")
+                label.quis-label Женщина
+              div.quis-input-box
+                input.quis-checkbox(type="checkbox")
+                label.quis-label Мужчина
 </template>
 
 <script>
 import FHeader from "~/components/f-header.vue";
 import FNavbar from "~/components/f-navbar.vue";
+import FModal from "~/components/f-modal.vue"
+import FQuis from "~/components/f-quis.vue"
 import ScreensPages from "~/components/ScreensPages.vue";
 import FNavBar from "~/components/f-navbar.vue";
 
@@ -44,12 +86,42 @@ export default {
   component: {
     ScreensPages,
     FHeader,
-    FNavBar
+    FNavBar,
+    FModal,
+    FQuis
+  },
+  data(){
+    return {
+      showModal1:false,
+      showModal2:false,
+      showModal3:false,
+    }
+  },
+  methods:{
+    startTest(){
+      console.log('start test');
+      document.querySelector('body').style.overflow = 'hidden'
+      window.scrollTo({
+        top:'0px'
+      })
+      this.showModal1 = true
+    },
+    closeModal1(){
+      this.showModal1 = false
+    },
+    closeModal2(){
+      this.showModal2 = false
+    },
+    closeModal3(){
+      this.showModal3 = false
+    }
   }
 };
 </script>
 
 <style lang="scss">
+
+@import "quis.scss";
 
 .totem-parent {
   display: flex;
@@ -139,7 +211,7 @@ export default {
 .quad-4 {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 0 16px;
 }
 
@@ -158,6 +230,35 @@ export default {
     transform: translate(0px, 2px);
   }
 }
+
+.text-block {
+  margin: 0 16px;
+}
+
+.test-head {
+  text-align: center;
+
+  font-family: 'm-e-bold',serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 40px;
+
+  margin-top: 16px;
+}
+
+.test-button-block {
+  margin: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.test-button {
+  width: 280px;
+  height: 60px;
+}
+
+
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
 
